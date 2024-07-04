@@ -14,7 +14,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: black; /* Optional: to make the background black */
+            background-color: black; /* Background color for the entire page */
         }
         iframe, img {
             border: none;
@@ -25,6 +25,11 @@
         }
         iframe.active, img.active {
             display: block;
+        }
+        #slideshow-iframe {
+            width: 100%;
+            height: 100%;
+            background-color: black; /* Background color for the iframe */
         }
     </style>
 </head>
@@ -62,6 +67,16 @@
             if (currentItem.type === 'url') {
                 iframe.src = currentItem.src;
                 iframe.classList.add('active');
+
+                // Add an onload and onerror event listener
+                iframe.onload = () => {
+                    console.log(`Loaded ${currentItem.src}`);
+                };
+                iframe.onerror = () => {
+                    console.error(`Failed to load ${currentItem.src}`);
+                    // Optionally display an error message or handle the error
+                    iframe.src = ''; // Clear the src if there's an error
+                };
             } else if (currentItem.type === 'image') {
                 img.src = currentItem.src;
                 img.classList.add('active');
