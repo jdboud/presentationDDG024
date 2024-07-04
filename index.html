@@ -11,11 +11,14 @@
             overflow: hidden;
             height: 100%;
             width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
         iframe, img {
             border: none;
-            height: 100%;
-            width: 100%;
+            max-width: 100%;
+            max-height: 100%;
             display: none;
         }
         iframe.active, img.active {
@@ -44,7 +47,7 @@
 
         ];
         let currentIndex = 0;
-        const intervalTime = 5000; // Time in milliseconds (5 seconds)
+        const intervalTime = 10000; // Time in milliseconds (10 seconds)
 
         function showNextItem() {
             const iframe = document.getElementById('slideshow-iframe');
