@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mixed Slideshow</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            height: 100%;
+            width: 100%;
+        }
+        iframe, img {
+            border: none;
+            height: 100%;
+            width: 100%;
+            display: none;
+        }
+        iframe.active, img.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <iframe id="slideshow-iframe"></iframe>
+    <img id="slideshow-img" src="" alt="Slideshow Image">
+
+    <script>
+        const items = [
+            { type: 'url', src: 'https://jdboud.github.io/empireSBwtSound/' },
+            { type: 'url', src: 'https://jdboud.github.io/SRM/' },
+            { type: 'image', src: '03InstJDBgsn05.jpg' },
+            { type: 'url', src: 'https://artolog.ca/search?search=' },
+            { type: 'image', src: '07LSfuneralBookJDBslb08.jpg' },
+            { type: 'image', src: '20200912_130443.jpg' },
+            { type: 'image', src: '20210803_101410.jpg' },
+            { type: 'image', src: '20210804_135539.jpg' },
+            { type: 'image', src: '1628006741710.jpg' },
+            { type: 'image', src: '1628007596704.jpg' },
+            { type: 'image', src: 'IMG_20151015_172241.jpg' }
+
+
+        ];
+        let currentIndex = 0;
+        const intervalTime = 5000; // Time in milliseconds (5 seconds)
+
+        function showNextItem() {
+            const iframe = document.getElementById('slideshow-iframe');
+            const img = document.getElementById('slideshow-img');
+            const currentItem = items[currentIndex];
+
+            iframe.classList.remove('active');
+            img.classList.remove('active');
+
+            if (currentItem.type === 'url') {
+                iframe.src = currentItem.src;
+                iframe.classList.add('active');
+            } else if (currentItem.type === 'image') {
+                img.src = currentItem.src;
+                img.classList.add('active');
+            }
+
+            currentIndex = (currentIndex + 1) % items.length;
+        }
+
+        setInterval(showNextItem, intervalTime);
+        showNextItem(); // Show the first item immediately
+    </script>
+</body>
+</html>
